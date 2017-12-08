@@ -45,15 +45,18 @@ public class DictionaryAttack extends Handler {
 	private boolean findOnDictionaries(String password, String passwordProcessed){
 		ArrayList<String> dictionary = FileUtils.getDictionaryInfo(StringConstants.DICCIONARYATTACK_FILE_WORDS);
 		// find the entry equals to the dictionary
+		String wordwithoutAccent;
+		String passwordLower = password.toLowerCase();
 		for(String word: dictionary){
 			wordCount++;
+			wordwithoutAccent = StringUtils.stripAccents(word);
 			if(
 					// Equals raw input in dictionary
-					word.equals(password)||
+					word.equals(passwordLower)||
 					//without accents compare with plain password
-					StringUtils.stripAccents(word).equals(password)||
+					wordwithoutAccent.equals(passwordLower)||
 					// without accents and compare With number at the end
-					StringUtils.stripAccents(word).equals(wordWithoutNumber)|| 
+					wordwithoutAccent.equals(wordWithoutNumber)||
 					// processedPassword
 					word.equals(passwordProcessed)||
 					// With number at the end
@@ -124,7 +127,7 @@ public class DictionaryAttack extends Handler {
 			String pass= password.getPassword();
 			// Case if we have numbers at the end
 			if(StringUtils.endsWithAny(pass, StringConstants.NUMBERS)){
-				wordWithoutNumber = StringUtils.stripAccents(pass);
+				wordWithoutNumber = StringUtils.stripAccents(pass).toLowerCase();
 				wordWithoutNumber = wordWithoutNumber.replaceAll("\\d*$", "");
 			}
 			// starting timer and process

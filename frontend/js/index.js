@@ -51,7 +51,7 @@ $(document).ready(function() {
 	$('#btnSend').click(function() {
 		console.log('function');
 		$("#response").empty();
-
+		$("#bio").hide();
 		var date = $('.datepicker').datepicker();
 		var name = $('#name').val();
 		var lastname1 = $('#lastname1').val();
@@ -115,12 +115,14 @@ $(document).ready(function() {
 				suggestionsHtml+= '</ul>';
 				console.log(suggestionsHtml);
 				$("#response").append(suggestionsHtml + responseTemplateEnd);
+				$("#bio").show();
 			},
 			error: function(error){
 				console.log(error);
 				var errorTemplate = '<div class="col-md-12 alert alert-dismissible alert-danger"><button id="errorBtn" type="button" class="close" data-dismiss="alert">&times;</button> <strong>Oh snap!  Error de conexión</strong></div>';
 				$("#response").empty();
 				$("#response").append(errorTemplate);
+				$("#bio").show();
 			}
 		});
 	}

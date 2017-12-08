@@ -36,11 +36,11 @@ public class BioDataCheck extends Handler {
 			timer.stop();
 			if(containsPassword){
 				BioDataResult result = new BioDataResult(TimeUtils.getMillisecondsFromTimer(timer));
-				result.setGuessed(containsFullWord);
+				result.setGuessed(containsPassword);
 				result.setContainsPartialWord(containsPartialWord);
 				result.setContainsFullWord(containsFullWord);
 				password.setBioDataResult(result);			
-				password.setGuessed(containsFullWord);
+				password.setGuessed(containsPassword);
 			}
 		}
 		handler.check(password);
@@ -54,10 +54,10 @@ public class BioDataCheck extends Handler {
 	private boolean containsPassword(Password password){
 		BioData bio = password.getBiodata();
 		Map<String, String> map = bio.getData();
-		String pass = password.toString();
+		String pass = password.toString().toLowerCase();
 	    for (Map.Entry<String, String> entry : map.entrySet()) {
 	        //String key= entry.getKey();
-	        String value = entry.getValue();
+	        String value = (entry.getValue()).toLowerCase();
 	        if(!StringUtils.isEmpty(value)){        
 		        containsFullWord =  containsFullWord(value, pass);
 		        containsPartialWord =  containsPartialWord(value, pass);

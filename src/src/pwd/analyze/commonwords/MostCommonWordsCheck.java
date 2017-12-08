@@ -29,7 +29,7 @@ public class MostCommonWordsCheck extends Handler{
 	private boolean findOnMostCommonWords(Password password){
 		// initialization
 		wordCount = 0;
-		String pass = Pattern.quote(password.getPassword());	
+		String pass = Pattern.quote(password.getPassword().toLowerCase());	
 		Pattern pattern = Pattern.compile(pass);	
 		ArrayList<String> dictionary = FileUtils.getDictionaryInfo(StringConstants.MOSTCOMMONWORDS_FILE);
 		for(String word: dictionary){
