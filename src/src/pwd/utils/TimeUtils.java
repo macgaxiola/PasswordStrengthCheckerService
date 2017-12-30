@@ -17,11 +17,13 @@ public class TimeUtils {
 
 	private static int GREATER = -1;
 	private static int CONSTANT = 60;
-	private static int CONSTANT_DAYS = 24;
-	private static int CONSTANT_MONTHS = 31;
-	private static int CONSTANT_YEARS = 365;
+
+	private static int CONSTANT_HOURS = 24;
+	private static int CONSTANT_DAY_IN_MONTH = 31;
+	private static int CONSTANT_DAY_IN_YEAR = 365;
 	private static String SPACE = " ";
 	private static int THOUSAND = 1000;
+	private static int ZERO = 0;
 
 		
 	public static String formatTime(BigDecimal milliseconds){
@@ -42,21 +44,21 @@ public class TimeUtils {
 				long minutes = TimeUnit.SECONDS.toMinutes(seconds);
 				long hours = TimeUnit.SECONDS.toHours(seconds); 
 				long day = TimeUnit.SECONDS.toDays(seconds);
-				long months = day/CONSTANT_MONTHS;
-				long years = day/CONSTANT_YEARS;
+				long months = day/CONSTANT_DAY_IN_MONTH;
+				long years = day/CONSTANT_DAY_IN_YEAR;
 				
 				if(seconds.longValue() != 0){
 					if(seconds < CONSTANT){
 						builder.append(seconds +SPACE+ StringHelper.getString("DateUtils.msg.seconds"));
 					}else if(seconds > CONSTANT && minutes <= CONSTANT){
 						builder.append(minutes +SPACE+ StringHelper.getString("DateUtils.msg.minutes"));
-					}else if(minutes > CONSTANT && hours <= CONSTANT_DAYS){
+					}else if(minutes > CONSTANT && hours <= CONSTANT_HOURS){
 						builder.append(hours +SPACE+ StringHelper.getString("DateUtils.msg.hours"));
-					}else if(day > CONSTANT_DAYS && day <= CONSTANT_MONTHS){
+					}else if(day > ZERO && day <= CONSTANT_DAY_IN_MONTH){
 						builder.append(day +SPACE+ StringHelper.getString("DateUtils.msg.days"));
-					}else if(day > CONSTANT_MONTHS && day <= CONSTANT_YEARS){
+					}else if(day > CONSTANT_DAY_IN_MONTH && day <= CONSTANT_DAY_IN_YEAR){
 						builder.append(months +SPACE+ StringHelper.getString("DateUtils.msg.months"));
-					}else if(day > CONSTANT_YEARS){
+					}else if(day > CONSTANT_DAY_IN_YEAR){
 						builder.append(years +SPACE+ StringHelper.getString("DateUtils.msg.years"));
 					}
 				}else{
