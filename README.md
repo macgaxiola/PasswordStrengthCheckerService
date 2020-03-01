@@ -1,5 +1,5 @@
 
-# PasswordStrengthCheckerService
+# Password Strength Checker Service
 
 ## Descripción
 El siguiente trabajo es una propuesta de implementación de un servicio web para la medición de la vulnerabilidad de una
